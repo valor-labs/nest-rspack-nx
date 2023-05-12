@@ -1,0 +1,67 @@
+{
+  "name": "nest-rspack",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nest-rspack/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/rspack:rspack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "web",
+        "outputPath": "dist/apps/nest-rspack",
+        "main": "apps/nest-rspack/src/main.tsx",
+        "tsConfig": "apps/nest-rspack/tsconfig.app.json",
+        "rspackConfig": "apps/nest-rspack/rspack.config.js",
+        "assets": [
+          "apps/nest-rspack/src/favicon.ico",
+          "apps/nest-rspack/src/assets"
+        ]
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production",
+          "optimization": true,
+          "sourceMap": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/rspack:dev-server",
+      "options": {
+        "buildTarget": "nest-rspack:build:development"
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "buildTarget": "nest-rspack:build:production"
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "nest-rspack:build"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/nest-rspack/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
