@@ -2,7 +2,10 @@
   "name": "nest-rspack-nx",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve-api": "nx serve nest-rspack",
+    "serve-docs": "nx serve nest-api-doc"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^9.1.1",
